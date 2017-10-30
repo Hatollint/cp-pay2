@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+
+<!-- Mirrored from byrushan.com/projects/ma/v1-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 Apr 2015 14:38:18 GMT -->
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>FlippyCampus Admin</title>
+
+        <!-- Vendor CSS -->
+        <link href="vendors/fullcalendar/fullcalendar.css" rel="stylesheet">
+        <link href="vendors/animate-css/animate.min.css" rel="stylesheet">
+        <link href="vendors/sweet-alert/sweet-alert.min.css" rel="stylesheet">
+
+        <!-- CSS -->
+        <link href="css/app.min.css" rel="stylesheet">
+        <link href="css/flippy.css" rel="stylesheet">
+
+    </head>
+    <body>
+        <header id="header">
+            <ul class="header-inner">
+                <li id="menu-trigger" data-trigger="#sidebar">
+                    <div class="line-wrap">
+                        <div class="line top"></div>
+                        <div class="line center"></div>
+                        <div class="line bottom"></div>
+                    </div>
+                </li>
+
+                <li class="logo hidden-xs">
+                    <a href="index.html">FlippyCampus Admin</a>
+                </li>
+
+                <li class="pull-right">
+                <ul class="top-menu">
+                  <!-- Ask Gideon on how to make the person icon bigger-->
+                  <li id="md-person">
+                      <a href="#"><i class="md md-person"></i></a>
+                  </li>
+
+                    <li id="toggle-width">
+                        <div class="toggle-switch">
+                            <input id="tw-switch" type="checkbox" hidden="hidden">
+                            <label for="tw-switch" class="ts-helper"></label>
+                        </div>
+                    </li>
+                    <li id="top-search">
+                        <a class="tm-search" href="#"></a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="tm-notification" href="#"><i class="tmn-counts">9</i></a>
+                        <div class="dropdown-menu dropdown-menu-lg pull-right">
+                            <div class="listview" id="notifications">
+                                <div class="lv-header">
+                                    Notification
+
+                                    <ul class="actions">
+                                        <li class="dropdown">
+                                            <a href="#" data-clear="notification">
+                                                <i class="md md-done-all"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="tm-settings" href="#"></a>
+                        <ul class="dropdown-menu dm-icon pull-right">
+                            <li>
+                                <a data-action="fullscreen" href="#"><i class="md md-fullscreen"></i> Toggle Fullscreen</a>
+                            </li>
+                            <li>
+                                <a data-action="clear-localstorage" href="#"><i class="md md-delete"></i> Clear Local Storage</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="md md-person"></i> Privacy Settings</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="md md-settings"></i>Other Settings</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="md md-history"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- <li class="hidden-xs" id="chat-trigger" data-trigger="#chat">
+                        <a class="tm-chat" href="#"></a>
+                    </li> -->
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Top Search Content -->
+            <div id="top-search-wrap">
+                <input type="text">
+                <i id="top-search-close">&times;</i>
+            </div>
+        </header>
+
+        <section id="main">
+            <aside id="sidebar">
+                <div class="sidebar-inner">
+                    <div class="si-inner">
+                        <div class="profile-menu">
+                            <a href="#">
+                                <div class="profile-pic">
+                                    <img src="img/profile-pics/1.jpg" alt="">
+                                </div>
+
+                                <div class="profile-info">
+                                    Malinda Hollaway
+                                </div>
+                            </a>
+                        </div>
+
+                        <ul class="main-menu">
+                            <!-- <li class="active"><a href="index.html"><i class="md md-home"></i> Home</a></li>
+                            <li><a href="typography.html"><i class="md md-format-underline"></i> Typography</a></li> -->
+                            <li class="sub-menu">
+                                <a href="#"><i class="md md-now-widgets"></i> Users</a>
+
+                                <ul>
+                                  <!-- Remember to change the link here-->
+                                    <li><a href="userPost.html">Users Post</a></li>
+                                    <li><a class="active" href="activeUsers.html">Active Users</a></li>
+                                    <li><a class="active" href="todayUsers.html">Today's Users</a></li>
+                                    <!-- And don't forget to change all the links in this section -->
+                                </ul>
+                            </li>
+
+                            <li class="sub-menu">
+                                <a href="#"><i class="md md-view-list"></i> Hot Topics</a>
+
+                                  <ul>
+                                      <li><a href="hotTopics.html">All Topics</a></li>
+                                      <li><a href="todayTopic.html">Today's Topic</a></li>
+                                      <li><a href="commuTopic.html">Topics by Communities</a></li>
+                                  </ul>
+
+                            </li>
+
+                            <li class="sub-menu">
+                                <a href="#"><i class="md md-my-library-books"></i>Posts</a>
+
+                                <ul>
+                                    <li><a href="postAuthor.html">Post Author</a></li>
+                                    <li><a href="postLike.html">Most Liked Post</a></li>
+                                    <li><a href="postView.html">Most Viewed Post</a></li>
+
+                                </ul>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="#"><i class="md md-swap-calls"></i>Community</a>
+                                <ul>
+                                    <li class="sub-menu">
+                                      <a href="colors.html">All Communities</a>
+                                    <ul>
+                                      <li class="sub-menu">
+                                      University of Ghana
+                                        <ul>
+
+                                          <li><a href="UGChannel.html">Channels</a></li>
+                                          <li><a href="UGUsers.html">Users</a></li>
+                                          <li><a href="UGPosts.html">Posts</a></li>
+
+                                        </ul>
+                                      </li>
+                                      <li class="sub-menu">
+                                      KNUST
+                                        <ul>
+
+                                          <li><a href="KNUSTChannel.html">Channels</a></li>
+                                          <li><a href="KNUSTChannel.html">Users</a></li>
+                                          <li><a href="KNUSTPosts.html">Posts</a></li>
+
+                                        </ul>
+                                      </li>
+                                      <li class="sub-menu">
+                                      University of CapeCoast
+                                        <ul>
+
+                                          <li><a href="UCCChannel.html">Channels</a></li>
+                                          <li><a href="UCCUsers.html">Users</a></li>
+                                          <li><a href="UCCPosts.html">Posts</a></li>
+
+                                        </ul>
+                                      </li>
+                                      <li class="sub-menu">
+                                      CBIT
+                                        <ul>
+
+                                          <li><a href="CBITChannel.html">Channels</a></li>
+                                          <li><a href="CBITUsers.html">Users</a></li>
+                                          <li><a href="CBITPosts.html">Posts</a></li>
+
+                                        </ul>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="#"><i class="md md-trending-up"></i>Channel</a>
+                                <ul>
+                                    <li class="sub-menu">
+                                      <a href="animations.html">Channel 1</a>
+                                      <ul>
+                                        <li><a href="#">Members</a></li>
+                                        <li><a href="#">Posts</a></li>
+                                      </ul>
+                                    </li>
+
+                                    <li class="sub-menu">
+                                      <a href="animations.html">Channel 2</a>
+                                      <ul>
+                                        <li><a href="#">Members</a></li>
+                                        <li><a href="#">Posts</a></li>
+                                      </ul>
+                                    </li>
+
+                                    <li class="sub-menu">
+                                      <a href="animations.html">Channel 3</a>
+                                      <ul>
+                                        <li><a href="#">Members</a></li>
+                                        <li><a href="#">Posts</a></li>
+                                      </ul>
+                                    </li>
+
+                                    <li class="sub-menu">
+                                      <a href="animations.html">Channel 4</a>
+                                      <ul>
+                                        <li><a href="#">Members</a></li>
+                                        <li><a href="#">Posts</a></li>
+                                      </ul>
+                                    </li>
+
+                                    <!-- <li><a href="other-charts.html">Other Charts</a></li> -->
+                                </ul>
+                            </li>
+
+                            <li class="sub-menu">
+                                <a href="#"><i class="md md-view-list"></i> Flips</a>
+
+                                  <ul>
+                                      <li><a href="data-tables.html">Today's Flip</a></li>
+                                      <li><a href="tables.html">Sponsored Flips</a></li>
+                                  </ul>
+                            </li>
+
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">Battles</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+            <section id="content">
+                <div class="container">
+
+                    <div class="row">
+                      <div class="activeUsers">
+                        <h3>University Of Ghana</h3>
+                      </div>
+
+                      <div class="card">
+                          <div class="listview lv-bordered lv-lg">
+                              <div class="lv-header-alt">
+                                  <h2 class="lvh-label hidden-xs">UG Channels</h2>
+                              </div>
+
+                              <div class="lv-body">
+
+                                  <div class="lv-item media">
+                                    <div class="pull-left">
+                                        <img class="lv-img-sm" src="img/profile-pics/1.jpg" alt="">
+                                    </div>
+                                      <div class="media-body">
+
+                                          <div class="lv-title">SRC</div>
+                                          <ul class="lv-attrs">
+                                              <li>Date Created: 09/06/2015</li>
+                                              <li>Members: 78954</li>
+                                              <li>Posts: 122</li>
+                                          </ul>
+
+                                          <div class="lv-actions actions dropdown">
+                                              <a href="#" data-toggle="dropdown" aria-expanded="true">
+                                                  <i class="md md-more-vert"></i>
+                                              </a>
+
+                                              <ul class="dropdown-menu dropdown-menu-right">
+                                                  <li>
+                                                      <a href="#">Edit</a>
+                                                  </li>
+                                                  <li>
+                                                      <a href="#">Delete</a>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="lv-item media">
+                                    <div class="pull-left">
+                                        <img class="lv-img-sm" src="img/profile-pics/1.jpg" alt="">
+                                    </div>
+                                      <div class="media-body">
+
+                                          <div class="lv-title">Computer Science Department</div>
+                                          <ul class="lv-attrs">
+                                              <li>Date Created: 09/06/2015</li>
+                                              <li>Members: 78954</li>
+                                              <li>Posts: 122</li>
+                                          </ul>
+
+                                          <div class="lv-actions actions dropdown">
+                                              <a href="#" data-toggle="dropdown" aria-expanded="true">
+                                                  <i class="md md-more-vert"></i>
+                                              </a>
+
+                                              <ul class="dropdown-menu dropdown-menu-right">
+                                                  <li>
+                                                      <a href="#">Edit</a>
+                                                  </li>
+                                                  <li>
+                                                      <a href="#">Delete</a>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="lv-item media">
+                                    <div class="pull-left">
+                                        <img class="lv-img-sm" src="img/profile-pics/1.jpg" alt="">
+                                    </div>
+                                      <div class="media-body">
+
+                                          <div class="lv-title">Office of the Vice Chancellor</div>
+                                          <ul class="lv-attrs">
+                                              <li>Date Created: 09/06/2015</li>
+                                              <li>Members: 78954</li>
+                                              <li>Posts: 122</li>
+                                          </ul>
+
+                                          <div class="lv-actions actions dropdown">
+                                              <a href="#" data-toggle="dropdown" aria-expanded="true">
+                                                  <i class="md md-more-vert"></i>
+                                              </a>
+
+                                              <ul class="dropdown-menu dropdown-menu-right">
+                                                  <li>
+                                                      <a href="#">Edit</a>
+                                                  </li>
+                                                  <li>
+                                                      <a href="#">Delete</a>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="lv-item media">
+                                    <div class="pull-left">
+                                        <img class="lv-img-sm" src="img/profile-pics/1.jpg" alt="">
+                                    </div>
+                                      <div class="media-body">
+
+                                          <div class="lv-title">Office of the Registrar</div>
+                                          <ul class="lv-attrs">
+                                              <li>Date Created: 09/06/2015</li>
+                                              <li>Members: 78954</li>
+                                              <li>Posts: 122</li>
+                                          </ul>
+
+                                          <div class="lv-actions actions dropdown">
+                                              <a href="#" data-toggle="dropdown" aria-expanded="true">
+                                                  <i class="md md-more-vert"></i>
+                                              </a>
+
+                                              <ul class="dropdown-menu dropdown-menu-right">
+                                                  <li>
+                                                      <a href="#">Edit</a>
+                                                  </li>
+                                                  <li>
+                                                      <a href="#">Delete</a>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="lv-item media">
+                                    <div class="pull-left">
+                                        <img class="lv-img-sm" src="img/profile-pics/1.jpg" alt="">
+                                    </div>
+                                      <div class="media-body">
+
+                                          <div class="lv-title">Mathematics</div>
+                                          <ul class="lv-attrs">
+                                              <li>Date Created: 09/06/2015</li>
+                                              <li>Members: 78954</li>
+                                              <li>Posts: 122</li>
+                                          </ul>
+
+                                          <div class="lv-actions actions dropdown">
+                                              <a href="#" data-toggle="dropdown" aria-expanded="true">
+                                                  <i class="md md-more-vert"></i>
+                                              </a>
+
+                                              <ul class="dropdown-menu dropdown-menu-right">
+                                                  <li>
+                                                      <a href="#">Edit</a>
+                                                  </li>
+                                                  <li>
+                                                      <a href="#">Delete</a>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+                                  <div class="lv-item media">
+                                    <div class="pull-left">
+                                        <img class="lv-img-sm" src="img/profile-pics/1.jpg" alt="">
+                                    </div>
+                                      <div class="media-body">
+
+                                          <div class="lv-title">International Student Hostel (ISH)</div>
+                                          <ul class="lv-attrs">
+                                              <li>Date Created: 23/01/2015</li>
+                                              <li>Members: 9954</li>
+                                              <li>Posts: 100</li>
+                                          </ul>
+
+                                          <div class="lv-actions actions dropdown">
+                                              <a href="#" data-toggle="dropdown" aria-expanded="true">
+                                                  <i class="md md-more-vert"></i>
+                                              </a>
+
+                                              <ul class="dropdown-menu dropdown-menu-right">
+                                                  <li>
+                                                      <a href="#">Edit</a>
+                                                  </li>
+                                                  <li>
+                                                      <a href="#">Delete</a>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+
+
+
+                              </div>
+                          </div>
+
+                          <ul class="pagination lv-pagination">
+                              <li>
+                                  <a href="#" aria-label="Previous">
+                                      <i class="md md-chevron-left"></i>
+                                  </a>
+                              </li>
+                              <li class="active"><a href="#">1</a></li>
+                              <li><a href="#">2</a></li>
+                              <li><a href="#">3</a></li>
+                              <li><a href="#">4</a></li>
+                              <li><a href="#">5</a></li>
+                              <li>
+                                  <a href="#" aria-label="Next">
+                                      <i class="md md-chevron-right"></i>
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
+                      </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Older IE warning message -->
+        <!--[if lt IE 9]>
+            <div class="ie-warning">
+                <h1 class="c-white">IE SUCKS!</h1>
+                <p>You are using an outdated version of Internet Explorer, upgrade to any of the following web browser <br/>in order to access the maximum functionality of this website. </p>
+                <ul class="iew-download">
+                    <li>
+                        <a href="http://www.google.com/chrome/">
+                            <img src="img/browsers/chrome.png" alt="">
+                            <div>Chrome</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.mozilla.org/en-US/firefox/new/">
+                            <img src="img/browsers/firefox.png" alt="">
+                            <div>Firefox</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.opera.com">
+                            <img src="img/browsers/opera.png" alt="">
+                            <div>Opera</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.apple.com/safari/">
+                            <img src="img/browsers/safari.png" alt="">
+                            <div>Safari</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                            <img src="img/browsers/ie.png" alt="">
+                            <div>IE (New)</div>
+                        </a>
+                    </li>
+                </ul>
+                <p>Upgrade your browser for a Safer and Faster web experience. <br/>Thank you for your patience...</p>
+            </div>
+        <![endif]-->
+
+        <!-- Javascript Libraries -->
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <script src="vendors/flot/jquery.flot.min.js"></script>
+        <script src="vendors/flot/jquery.flot.resize.min.js"></script>
+        <script src="vendors/flot/plugins/curvedLines.js"></script>
+        <script src="vendors/sparklines/jquery.sparkline.min.js"></script>
+        <script src="vendors/easypiechart/jquery.easypiechart.min.js"></script>
+
+        <script src="vendors/fullcalendar/lib/moment.min.js"></script>
+        <script src="vendors/fullcalendar/fullcalendar.min.js"></script>
+        <script src="vendors/simpleWeather/jquery.simpleWeather.min.js"></script>
+        <script src="vendors/auto-size/jquery.autosize.min.js"></script>
+        <script src="vendors/nicescroll/jquery.nicescroll.min.js"></script>
+        <script src="vendors/waves/waves.min.js"></script>
+        <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+        <script src="vendors/sweet-alert/sweet-alert.min.js"></script>
+
+        <script src="js/flot-charts/curved-line-chart.js"></script>
+        <script src="js/flot-charts/line-chart.js"></script>
+        <script src="js/charts.js"></script>
+
+        <script src="js/charts.js"></script>
+        <script src="js/functions.js"></script>
+
+
+
+    </body>
+
+  <!-- Mirrored from byrushan.com/projects/ma/v1-2/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 Apr 2015 14:39:17 GMT -->
+  </html>

@@ -1,0 +1,629 @@
+<?php $zara->factory->startSection("content"); ?>
+<div class="container">
+    <div class="card">
+        <div class="row tab" role="tabpanel">
+            <div class="col-lg-12">
+                <div class="panel-body shop-head" style="background-image: url('https://cp.localpay.ru/images/<?php echo e($cat[$project['shop_game']]); ?>_header.png')">
+                    <img src="https://cp.localpay.ru/images/<?php echo e($cat[$project['shop_game']]); ?>_icon.png" style="float: left">
+                    <div class="game-name">
+                        <?php echo e($project['shop_name']); ?>
+
+                        <p><?php echo e($project['shop_domain']); ?></p>
+                    </div>
+                    <div class="site-balance">
+                        Общий доход проекта
+                        <p><?php echo e((float)$project['shop_balance']); ?> <i class="fa fa-rub"></i></p>
+                    </div>
+                </div>
+                <ul class="tab-nav" role="tablist" tabindex="3" style="overflow: hidden; outline: none;">
+                    <li class="active"><a href="#stats" aria-controls="stats" role="tab" data-toggle="tab" aria-expanded="true">Статистика</a></li>
+                    <li role="presentation" class=""><a href="#items" aria-controls="items" role="tab" data-toggle="tab" aria-expanded="false">Платежи</a></li>
+                    <li role="presentation" class=""><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false">Настройки</a></li>
+                    <li role="presentation" class=""><a href="#form" aria-controls="form" role="tab" data-toggle="tab" aria-expanded="false">Форма оплаты</a></li>
+                    
+                    <li role="presentation" class="pull-right"><a href="#moder" aria-controls="moder" role="tab" data-toggle="tab" aria-expanded="false">
+						<?php if($project['shop_status'] == 0): ?>
+	                   	<span class="label label-warning">Ожидает модерации</span>
+	                   	<?php elseif($project['shop_status'] == 1): ?>
+	                   	<span class="label label-success">Одобрен</span>
+	                   	<?php elseif($project['shop_status'] == 2): ?>
+	                   	<span class="label label-danger">Заблокирован</span>
+	                   	<?php elseif($project['shop_status'] == 3): ?>
+	                   	<span class="label label-info">Ожидает подтверждения</span>
+	                   	<?php endif; ?>
+                    </a></li>
+                </ul>
+            </div>
+			<div class="tab-content">
+				<div class="col-lg-12 tab-pane animated fadeInUp <?php if($project['shop_status'] == 0 or $project['shop_status'] == 2 or $project['shop_status'] == 3): ?> active <?php endif; ?> " style="margin-top: 20px;" role="tabpanel" id="moder">
+					<?php if($project['shop_status'] == 0): ?>
+           	<div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body card-padding bgm-orange c-white">
+                        Ваш проект ожидает прохождения модерации нашими модераторами.<br>
+                        Подробнее о модерации вы можете прочитать в нашем центре помощи - <a href="https://help.localpay.ru/article/moderation-project" style="color: #EFEFEF;">https://help.localpay.ru/article/moderation-project</a>
+                    </div>
+                </div>
+            </div>
+           	<?php elseif($project['shop_status'] == 1): ?>
+           	<div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body card-padding bgm-green c-white">
+                        Ваш проект был одобрен и вы можете пользоваться всеми функциями сервиса.<br>
+                        Если вам нужна помощь вы можете найти некоторые ответы в нашем <a href="https://help.localpay.ru/" style="color: #EFEFEF;">центре помощи</a>, если вы не найдете ответ вы можете обратиться в нашу <a href="/support" style="color: #EFEFEF;">поддержку</a>.
+                    </div>
+                </div>
+            </div>
+           	<?php elseif($project['shop_status'] == 2): ?>
+           	<div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body card-padding bgm-red c-white">
+                        Ваш проект был проверен нашими модераторами и был отклонен в связи с несоотвествием правил.<br>
+                        Сообщение от модератора: <u><?php echo e($project['shop_reason']); ?></u>
+                    </div>
+                </div>
+            </div>
+           	<?php elseif($project['shop_status'] == 3): ?>
+           	<div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body card-padding bgm-blue c-white">
+                        При добавлении проекта вы не завершили второй этап (проверка сайта) добавления.<br>
+                        <a href="/project/add/<?php echo e($project['shop_id']); ?>" style="color: #EFEFEF;">Закончить добавление сайта.</a>
+                    </div>
+                </div>
+            </div>
+           	<?php endif; ?>
+				</div>
+
+	            <div class="col-lg-12 tab-pane animated fadeInUp <?php if($project['shop_status'] == 1): ?> active <?php endif; ?>" style="margin-top: 20px;" role="tabpanel" id="stats">
+	            	<div class="col-sm-4">
+	                    <div class="mini-charts-item bgm-lightgreen">
+	                        <div class="clearfix">
+	                            <div class="chart stats-bar-2"><canvas width="83" height="45" style="display: inline-block; width: 83px; height: 45px; vertical-align: top;"></canvas></div>
+	                            <div class="count">
+	                                <small>Доход за сегодня</small>
+	                                <h2><?php echo e((float)$stats[3][0]['sum']); ?> <i class="fa fa-rub"></i></h2>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+				    <div class="col-sm-4">
+	                    <div class="mini-charts-item bgm-bluegray">
+	                        <div class="clearfix">
+	                            <div class="chart stats-line"><canvas width="83" height="45" style="display: inline-block; width: 83px; height: 45px; vertical-align: top;"></canvas></div>
+	                            <div class="count">
+	                                <small>Доход за неделю</small>
+	                                <h2><?php echo e((float)$stats[4][0]['sum']); ?> <i class="fa fa-rub"></i></h2>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-sm-4">
+	                    <div class="mini-charts-item bgm-orange">
+	                        <div class="clearfix">
+	                            <div class="chart stats-bar-2"><canvas width="83" height="45" style="display: inline-block; width: 83px; height: 45px; vertical-align: top;"></canvas></div>
+	                            <div class="count">
+	                                <small>Всего платежей</small>
+	                                <h2><?php echo e($stats[5]); ?></i></h2>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+
+	                <div class="col-md-6">
+	                    <div class="card" style="border: 1px solid rgba(204, 204, 204, 0.48); box-shadow: none;">
+	                        <div class="card-header">
+	                            <h2>Статистика платежей
+									<small>Платежи за последние 7 дней</small>
+	                            </h2>
+	                        </div>
+	                    
+	                        <div class="card-body">
+	                            <div class="chart-edge">
+	                            	<div id="payments-stats" class="flot-chart"></div>    
+	                          	</div>
+	                        </div>
+	                    </div>
+	                </div>
+
+	                <div class="col-md-6">
+	                    <div class="card" style="border: 1px solid rgba(204, 204, 204, 0.48); box-shadow: none;">
+	                        <div class="card-header">
+	                            <h2>Статистика дохода
+									<small>Доход за последние 7 дней</small>
+	                            </h2>
+	                        </div>
+	                    
+	                        <div class="card-body">
+	                            <div class="chart-edge">
+	                            	<div id="money-stats" class="flot-chart"></div>    
+	                          	</div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+
+	            <div class="col-lg-12 tab-pane animated fadeInUp" style="margin-top: 20px;" role="tabpanel" id="items">
+	            	<table id="data-table-command" class="table table-striped bootgrid-table" aria-busy="false">
+		                <thead>
+		                    <tr>
+		                        <th data-column-id="id" class="text-left" data-type="numeric">#</th>
+		                        <th data-column-id="time" class="text-left">Дата</th>
+		                        <th data-column-id="system" class="text-left">Система</th>
+		                        <th data-column-id="invoice" class="text-left">№ Счета</th>
+		                        <th data-column-id="sum" data-formatter="sum" class="text-left">Сумма</th>
+		                        <th data-column-id="addsum" data-formatter="addsum" class="text-left">Доход</th>
+		                        <th data-column-id="status" data-formatter="status" class="text-left">Статус</th>
+		                        <th data-column-id="commands" data-formatter="commands" data-sortable="false"></th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                	<? $id = 0 ?>
+		                    <?php foreach($items as $item): ?>
+		                    <? $id++ ?>
+		                    <tr>
+		                        <td><?php echo e($item['log_payments_id']); ?></td>
+		                        <td><?php echo e(date("d.m.Y", strtotime($item['log_payments_time']))); ?></td>
+		                        <td><?php echo e($item['log_payments_system']); ?></td>
+		                        <td><?php echo e($item['user_id']); ?></td>
+		                        <td><?php echo e($item['log_payments_sum']); ?> <i class="fa fa-rub"></i></td>
+		                        <td><?php echo e((float)$item['log_payments_sum_client']); ?></td>
+		                        <td><?php echo e($item['log_payments_status']); ?></td>
+		                    </tr>
+		                    <?php endforeach; ?>
+		                </tbody>
+		            </table>
+	            </div>
+
+	            <div class="col-lg-12 tab-pane animated fadeInUp" style="margin-top: 20px; padding: 20px 35px;" role="tabpanel" id="settings">
+			          <form class="col-sm-6" method="POST" action="#" id="generalInfo">                       
+                    <ul class="tab-nav" style="overflow: hidden; outline: none; margin-top: -30px; margin-bottom: 35px;">
+                      <li><a href="#">Основная информация</a></li>
+                    </ul>
+                    <div class="form-group fg-float">
+                        <div class="fg-line fg-toggled">
+                            <input type="text" class="input-sm form-control fg-input" name="shop_name" value="<?php echo e($project['shop_name']); ?>">
+                        </div>
+                        <label class="fg-label">Название проекта</label>
+                    </div>
+
+                    <br>
+                    
+                    <div class="form-group fg-float">
+                        <div class="fg-line fg-toggled">
+                            <select class="input-sm form-control fg-input" name="shop_game">
+                              <option value="0" selected disabled>Выберите категорию</option>
+                              <option value="1" <?php if($project['shop_game'] == 1): ?> selected <?php endif; ?> >San Andreas Multiplayer</option>
+                              <option value="2" <?php if($project['shop_game'] == 2): ?> selected <?php endif; ?>>Steam</option>
+                              <option value="3" <?php if($project['shop_game'] == 3): ?> selected <?php endif; ?>>Counter Strike</option>
+                              <option value="5" <?php if($project['shop_game'] == 5): ?> selected <?php endif; ?>>Интернет-магазин</option>
+                              <option value="4" <?php if($project['shop_game'] == 4): ?> selected <?php endif; ?>>Другая</option>
+                            </select>
+                        </div>
+                        <label class="fg-label">Игра</label>
+                    </div>
+                    
+                    <br>
+
+                    <ul class="tab-nav" style="overflow: hidden; outline: none; margin-top: -30px; margin-bottom: 35px;">
+                      <li><a href="#">Уведомления</a></li>
+                    </ul>
+
+                    <div class="form-group checkbox m-b-15" style="margin-top: -20px;">
+                        Вы можете включить уведомление на ваш E-mail адрес в случае успешной оплаты в вашем магазине.
+                        <br><br>
+                        <label>
+                            <input type="checkbox" name="notif" value="on" <?php if($project['shop_notify']): ?> checked <?php endif; ?> >
+                            <i class="input-helper"></i>
+                            Включить уведомления на E-mail
+                        </label>
+                    </div>
+
+                    <br>
+
+                    <div class="input-group">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <div class="fg-line">    
+                                <input type="hidden" name="generalInfo" value="true">
+                                <button class="btn btn-primary btn-sm hec-button waves-effect waves-button">Сохранить</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form class="col-sm-6" method="POST" action="#" id="otherInfo">                       
+                    <ul class="tab-nav" style="overflow: hidden; outline: none; margin-top: -30px; margin-bottom: 35px;">
+                      <li><a href="#">Данные проекта</a></li>
+                    </ul>
+                    <div class="input-group fg-float">
+                        <div class="fg-line fg-toggled disabled">
+                            <input type="text" class="input-sm form-control fg-input" id="shop_secret_key" value="<?php echo e($project['shop_secret_key']); ?>" disabled>
+                        </div>
+                        <label class="fg-label">Секретный ключ</label>
+                        <span class="input-group-addon"><i class="fa fa-edit" id="new_secret" data-toggle="tooltip" data-placement="left" title="Сгенерировать новый"></i></span>
+                    </div>
+
+                    <br><br>
+
+                    <div class="input-group fg-float">
+                        <div class="fg-line fg-toggled disabled">
+                            <input type="text" class="input-sm form-control fg-input" id="shop_public_key" value="<?php echo e($project['shop_public_key']); ?>" disabled>
+                        </div>
+                        <label class="fg-label">Публичный ключ</label>
+                        <span class="input-group-addon"><i class="fa fa-edit" id="new_public" data-toggle="tooltip" data-placement="left" title="Сгенерировать новый"></i></span>
+                    </div>
+
+                    <br>
+                    <br>
+                    <br>
+                    
+                    <ul class="tab-nav" style="overflow: hidden; outline: none; margin-top: -30px; margin-bottom: 35px;">
+                      <li><a href="#">Обработчик</a></li>
+                    </ul>
+
+                    <div class="input-group fg-float">
+                        <div class="fg-line fg-toggled disabled">
+                            <input type="text" class="input-sm form-control fg-input" id="shop_url" name="shop_url" value="<?php echo e($project['shop_url']); ?>" onChange="changeURL()">
+                        </div>
+                        <label class="fg-label">Адрес обработчика</label>
+                        <span class="input-group-addon" id="url_status">
+                          <div class="label label-danger" data-toggle="tooltip" data-placement="top" title="Ошибка">
+                            <i class="fa fa-remove"></i>
+                          </div>
+                        </span>
+                    </div>
+
+                    <br><br><br>
+
+                    <ul class="tab-nav" style="overflow: hidden; outline: none; margin-top: -30px; margin-bottom: 35px;">
+                      <li><a href="#">Переадресация</a></li>
+                    </ul>
+
+                    <div class="form-group fg-float" style="margin-top: -20px;">
+                        Если Ваш проект содержит специальные страницы на случай успешного платежа или ошибки оплаты заказа, рекомендуем активировать эту возможность и указать URL таких страниц. 
+                        <br><br>
+                        <small>Если вы оставите поля пустыми, переадрессация будет производиться на сайт вашего проекта</small>
+                    </div>
+
+                    <div class="form-group fg-float">
+                        <div class="fg-line fg-toggled disabled">
+                            <input type="text" class="input-sm form-control fg-input" name="shop_fail_url" value="<?php echo e($project['shop_fail_url']); ?>" onChange="changeURL()">
+                        </div>
+                        <label class="fg-label">Fail URL</label>
+                    </div>
+
+                    <div class="form-group fg-float">
+                        <div class="fg-line fg-toggled disabled">
+                            <input type="text" class="input-sm form-control fg-input" name="shop_success_url" value="<?php echo e($project['shop_success_url']); ?>" onChange="changeURL()">
+                        </div>
+                        <label class="fg-label">Success URL</label>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <div class="fg-line">    
+                                <input type="hidden" name="otherInfo" value="true">
+                                <button class="btn btn-primary btn-sm hec-button waves-effect waves-button">Сохранить</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+	            </div>
+
+	            <div class="col-lg-12 tab-pane animated fadeInUp" style="margin-top: 20px;" role="tabpanel" id="form">
+					       <div class="col-lg-6">
+                    <ul class="tab-nav" role="tablist" tabindex="3" style="overflow: hidden; outline: none;">
+	                     <li class="active"><a href="#url" aria-controls="stats" role="tab" data-toggle="tab" aria-expanded="true">Ссылка оплаты</a></li>
+	                     <li role="presentation" class=""><a href="#formcode" aria-controls="items" role="tab" data-toggle="tab" aria-expanded="false">HTML форма</a></li>
+            		    </ul>
+
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane well active" id="url">
+                          https://api.localpay.ru/pay?public_key=<span class="alert-info"><?php echo e($project['shop_public_key']); ?></span>&amp;<span class="alert-success">sum</span>=10&amp;<span class="alert-success">account</span>=demo&amp;<span class="alert-success">desc</span>=Описание+платежа
+                        </div>
+                        <div role="tabpanel" class="tab-pane well" id="formcode">
+                            &lt;form action="https://api.localpay.ru/pay"&gt;<br>
+                          &lt;input type="hidden" name="public_key" value="<span class="alert-info"><?php echo e($project['shop_public_key']); ?></span>"&gt;<br>
+                          &lt;input type="text" <span class="alert-success">name="account"</span> value="test"&gt;<br>
+                          &lt;input type="text" <span class="alert-success">name="sum"</span> value="50"&gt;<br>
+                          &lt;input type="hidden" <span class="alert-success">name="desc"</span> value="Описание платежа"&gt;<br>
+                          &lt;input class="btn" type="submit" value="Оплатить"&gt;<br>
+                          &lt;/form&gt;
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <table class="table table-striped">
+                      <tbody>
+                        <tr>
+                          <td class="span3" style="border-top: none"><span class="label label-success">:sum</span></td>
+                          <td class="text-medium" style="border-top: none">Сумма платежа (например, 10)</td>
+                        </tr>
+                        <tr>
+                          <td class="span2" style="border-top: 1px solid #eee"><span class="label label-success">:account</span></td>
+                          <td class="text-medium" style="border-top: 1px solid #eee">Идентификатор абонента в системе партнера <br>(например email абонента или номер заказа)</td>
+                        </tr>
+                        <tr>
+                          <td class="span2" style="border-top: 1px solid #eee"><span class="label label-success">:desc</span></td>
+                          <td class="text-medium" style="border-top: 1px solid #eee">Описание заказа</td>
+                        </tr>
+                        <tr>
+                          <td class="span2" style="border-top: 1px solid #eee"><span class="label label-default">:sign</span></td>
+                          <td class="text-medium" style="border-top: 1px solid #eee"><a target="_blank" href="https://help.localpay.ru/article/creating-payment">Цифровая подпись запроса</a>.
+                              Формируется как md5 хеш результата склеивания параметров: account, currency, desc, sum и
+                              <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false">SECRET KEY</a>.
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+	            </div>
+	        </div>
+        </div>
+
+    </div>
+</div>
+
+<?php foreach($items as $item): ?>
+<div class="modal fade" id="detail-<?php echo e($item['log_payments_id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Детали платежа #<?php echo e($item['log_payments_id']); ?></h4>
+        </div>
+        <div class="modal-body">
+          <? $sign = md5($item['user_id'].$item['log_payments_sum'].$project['shop_secret_key'])?>
+          <?php if($item['log_payments_status'] >= 2): ?> 
+          <div id="requests-<?php echo e($item['log_payments_id']); ?>" style="display: none">
+            <div class="well well-sm" style="word-wrap: break-word;">
+            <span class="label label-success">Запрос</span><hr style="margin: 5px 0">
+            <?php echo e($project['shop_url']); ?>?<br>
+            method=check&amp;params[account]=<?php echo e($item['user_id']); ?>&amp;params[projectId]=<?php echo e($item['shop_id']); ?>&amp;params[sum]=<?php echo e($item['log_payments_sum']); ?>&amp;params[sign]=<?php echo e($sign); ?>&amp;params[localpayId]=<?php echo e($item['log_payments_id']); ?>
+
+            </div>
+            <div class="well well-sm" style="word-wrap: break-word; text-align: right">
+            <span class="label label-success" style="clear: right">Ответ</span><hr style="margin: 5px 0">
+            {"jsonrpc":"2.0","result":{"message":"CHECK is successful"},"id":1}
+            </div>
+            <div class="well well-sm" style="word-wrap: break-word;">
+            <span class="label label-success">Запрос</span><hr style="margin: 5px 0">
+            <?php echo e($project['shop_url']); ?>?<br>
+            method=pay&amp;params[account]=<?php echo e($item['user_id']); ?>&amp;params[projectId]=<?php echo e($item['shop_id']); ?>&amp;params[sum]=<?php echo e($item['log_payments_sum']); ?>&amp;params[sign]=<?php echo e($sign); ?>&amp;params[localpayId]=<?php echo e($item['log_payments_id']); ?>
+
+            </div>
+            <div class="well well-sm" style="word-wrap: break-word; text-align: right">
+            <span class="label label-success" style="clear: right">Ответ</span><hr style="margin: 5px 0">
+            {"jsonrpc":"2.0","result":{"message":"Pay is successful"},"id":1}
+            </div>
+          </div>
+          <?php elseif($item['log_payments_status'] == 0): ?>
+          <div id="requests-<?php echo e($item['log_payments_id']); ?>" style="display: none">
+            <div class="well well-sm" style="word-wrap: break-word;">
+            <span class="label label-success">Запрос</span><hr style="margin: 5px 0">
+            <?php echo e($project['shop_url']); ?>?<br>
+            method=check&amp;params[account]=<?php echo e($item['user_id']); ?>&amp;params[projectId]=<?php echo e($item['shop_id']); ?>&amp;params[sum]=<?php echo e($item['log_payments_sum']); ?>&amp;params[sign]=<?php echo e($sign); ?>&amp;params[localpayId]=<?php echo e($item['log_payments_id']); ?>
+
+            </div>
+            <div class="well well-sm" style="word-wrap: break-word; text-align: right">
+            <span class="label label-success" style="clear: right">Ответ</span><hr style="margin: 5px 0">
+            {"jsonrpc":"2.0","result":{"message":"CHECK is successful"},"id":1}
+            </div>
+          </div>
+          <?php else: ?>
+          <div id="requests-<?php echo e($item['log_payments_id']); ?>" style="display: none">
+            <div class="well well-sm" style="word-wrap: break-word;">
+            <span class="label label-success">Запрос</span><hr style="margin: 5px 0">
+            <?php echo e($project['shop_url']); ?>?<br>
+            method=check&amp;params[account]=<?php echo e($item['user_id']); ?>&amp;params[projectId]=<?php echo e($item['shop_id']); ?>&amp;params[sum]=<?php echo e($item['log_payments_sum']); ?>&amp;params[sign]=<?php echo e($sign); ?>&amp;params[localpayId]=<?php echo e($item['log_payments_id']); ?>
+
+            </div>
+            <div class="well well-sm" style="word-wrap: break-word; text-align: right">
+            <span class="label label-danger" style="clear: right">Ответ</span><hr style="margin: 5px 0">
+            {"jsonrpc":"2.0","error":{"code":-32000,"message":"Character not found!"},"id":1}
+            </div>
+          </div>
+          <?php endif; ?>
+          <div class="btn btn-primary btn-xs open" data-id="<?php echo e($item['log_payments_id']); ?>">Показать подробности</div>
+          <br><br>Система оплаты: <b><?php echo e($item['log_payments_system']); ?></b>
+          <br>Время создания платежа: <b><?php echo e(date("d.m.Y в H:i", strtotime($item['log_payments_time']))); ?></b>
+          <?php if($item['log_payments_status'] >= 2): ?> 
+          <br>Время оплаты платежа: <b><?php echo e(date("d.m.Y в H:i", strtotime($item['log_payments_time_complete']))); ?></b>
+          <?php else: ?>
+          <br>Время оплаты платежа: <b>Неоплачен</b>  
+          <?php endif; ?>
+          <br>№ счета: <b><?php echo e($item['user_id']); ?></b>
+          <br>Сумма платежа: <b><?php echo e($item['log_payments_sum']); ?> <i class="fa fa-rub"></i></b>
+          <br>Ваш доход: <b><small>+</small><?php echo e($item['log_payments_sum_client']); ?> <i class="fa fa-rub"></i> (<?php echo e(floor($item['log_payments_sum_client']*100/$item['log_payments_sum'])); ?>%)</b>
+        </div>
+      </div>
+    </div>
+	</div>
+<?php endforeach; ?>
+
+<script src="/assets/js/flot-charts/line-chart.js"></script>
+<script src="/assets/js/charts.js"></script>
+<script>
+	$("#data-table-command").bootgrid({
+        css: {
+            icon: 'md icon',
+            iconColumns: 'md-view-module',
+            iconDown: 'md-expand-more',
+            iconRefresh: 'md-refresh',
+            iconUp: 'md-expand-less'
+        },
+        formatters: {
+            "commands": function(column, row) {
+                return "<button type=\"button\" class=\"btn btn-xs command-list\" onClick=\"$('#detail-"+ row.id +"').modal('show');\"><span class=\"md md-list\"></span></button>";
+            },
+            "addsum": function(column, row) {
+            	return '<small>+</small>'+ row.addsum +' <i class="fa fa-rub"></i>';
+            },
+            "sum": function(column, row) {
+            	return row.sum +' <i class="fa fa-rub"></i>';
+            },
+            "status": function(column, row) {
+
+                if(row.status == 0){
+                    return '<span class="label label-warning">В процессе</span>';
+                } 
+                if(row.status == 1){
+                    return '<span class="label label-danger">Ошибка</span>';
+                } 
+                if(row.status >= 2){
+                    return '<span class="label label-success">Оплачен</span>';
+                } 
+
+            }
+        }
+    });
+
+    if(<?php echo e($id); ?> <= 10){
+        $("#data-table-basic-command").remove();
+    }
+    // $("#data-table-command-header").remove();
+
+    var options = {
+        series: {
+            shadowSize: 0,
+            lines: {
+                show: false,
+                lineWidth: 0,
+            },
+        },
+        grid: {
+            borderWidth: 0,
+            labelMargin:10,
+            hoverable: true,
+            clickable: true,
+            mouseActiveRadius:6,
+            
+        },
+        xaxis: {
+            tickDecimals: 0,
+            ticks: false
+        },
+        
+        yaxis: {
+            tickDecimals: 0,
+            ticks: false
+        },
+        
+        legend: {
+            show: false
+        }
+    };
+
+    <?php $id = 0 ?>
+    <?php $ids = 0 ?>
+
+    var d1 = [];
+    <?php foreach($stats[1] as $item): ?>
+        d1.push([<?php echo e($id++); ?>, <?php echo e((int)$item['stat']); ?>]);
+    <?php endforeach; ?>
+    var d2 = [];
+ 	  <?php foreach($stats[2] as $item): ?>
+        d2.push([<?php echo e($ids++); ?>, <?php echo e((float)$item['sum']); ?>]);
+    <?php endforeach; ?>   
+
+    $.plot($("#payments-stats"), [
+        {data: d1, lines: { show: true, fill: 0.98 }, label: 'Платежей', stack: true, color: '#f1dd2c' }
+    ], options);
+
+    $.plot($("#money-stats"), [
+        {data: d2, lines: { show: true, fill: 0.98 }, label: 'Доход', stack: true, color: '#e3e3e3' },
+    ], options);
+
+    $(".open").click(function(){
+        $("#requests-" + $(this).attr("data-id")).css("display", "block");
+        $(this).css("display", "none");
+  	});
+
+    $('#generalInfo, #otherInfo').ajaxForm({ 
+        url: location.pathname,
+        dataType: 'text',
+        success: function(data) {
+            console.log(data);
+            data = $.parseJSON(data);
+            switch(data.status) {
+                case 'error':
+                  message(data.error, 'danger');
+                  $('button[type=submit]').prop('disabled', false);                                               
+                    break;
+                case 'success':
+                    message(data.success, 'success');
+                    break;
+            }
+        },
+        beforeSubmit: function(arr, $form, options) {
+            $('button[type=submit]').prop('disabled', true);
+        }
+    }); 
+
+    function changeURL(){
+      $.ajax({
+        url: location.path,
+        type: "POST",
+        data: {ajax: "checkURL", url: $("#shop_url").val()},
+        success: function(data){
+          data = $.parseJSON(data);
+          switch(data.status) {
+              case 'error':
+                  $("#url_status").html('<div class="label label-danger"  data-toggle="tooltip" data-placement="top" title="Ошибка"><i class="fa fa-remove"></i></div>');                                              
+                  break;
+              case 'success':
+                  $("#url_status").html('<div class="label label-success"  data-toggle="tooltip" data-placement="top" title="ОК"><i class="fa fa-check"></i></div>');
+                  break;
+          }
+        }
+      })
+    }
+
+    $("#new_public").click(function(){
+        $.ajax({
+          url: location.pathname,
+          type: "POST",
+          data: {ajax: "new_public"},
+          success: function (data) {
+            data = $.parseJSON(data);
+            switch(data.status) {
+                case 'error':
+                  message(data.error, 'danger');
+                  $('button[type=submit]').prop('disabled', false);                                               
+                    break;
+                case 'success':
+                    message(data.success, 'success');
+                    $("#shop_public_key").val(data.key);
+                    break;
+            }
+          }
+        })
+    });
+
+    $("#new_secret").click(function(){
+        $.ajax({
+          url: location.pathname,
+          type: "POST",
+          data: {ajax: "new_secret"},
+          success: function (data) {
+            data = $.parseJSON(data);
+            switch(data.status) {
+                case 'error':
+                  message(data.error, 'danger');
+                  $('button[type=submit]').prop('disabled', false);                                               
+                    break;
+                case 'success':
+                    message(data.success, 'success');
+                    $("#shop_secret_key").val(data.key);
+                    break;
+            }
+          }
+        })
+    });
+
+    $(document).ready(function(){
+      changeURL();
+    });
+</script>
+<?php $zara->factory->stopSection(); ?>
+<?php echo $zara->compile("main", get_defined_vars(), $this->factory)->getCompiled(); ?>
