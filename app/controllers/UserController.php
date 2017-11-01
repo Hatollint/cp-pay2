@@ -95,10 +95,10 @@ class UserController extends Controller {
 				return json_encode($result);
 			}
 
-			// $this->UserModel->set(['user_wmr' => $wm, 'user_qiwi' => $qiwi])->where("user_id", "=", $userid)->update();
-			$this->UserModel->addSecureRequest("2", $userid, [$wm, $qiwi]);
-			// $result = ['status' => 'success', 'success' => "Данные успешно изменены!"];
-			$result = ['status' => 'success', 'success' => "Подтвердите ваши действия, на вашу почту отправленна ссылка подтверждения!"];
+			$this->UserModel->set(['user_wmr' => $wm, 'user_qiwi' => $qiwi])->where("user_id", "=", $userid)->update();
+			//$this->UserModel->addSecureRequest("2", $userid, [$wm, $qiwi]);
+			$result = ['status' => 'success', 'success' => "Данные успешно изменены!"];
+			//$result = ['status' => 'success', 'success' => "Подтвердите ваши действия, на вашу почту отправленна ссылка подтверждения!"];
 			$this->LogModel->pushLog("Изменение кошельков", $this->router->route());
 			return json_encode($result);
 		}
